@@ -4,9 +4,9 @@ namespace PAD_TFI.Dominio {
 	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Linq;
 
-	public partial class Modelo : DbContext {
-		public Modelo()
-			: base("name=Modelo") {
+	public partial class BaseDeDatos : DbContext {
+		public BaseDeDatos()
+			: base("name=Model") {
 		}
 
 		public virtual DbSet<CategoriaSet> CategoriaSet { get; set; }

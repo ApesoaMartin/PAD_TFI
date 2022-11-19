@@ -27,6 +27,8 @@ namespace PAD_TFI.Dominio
         [Required]
         public string SKU { get; set; }
 
+        public string Imagen { get; set; }
+
         public int Categoria_Id { get; set; }
 
         public int Marca_Id { get; set; }

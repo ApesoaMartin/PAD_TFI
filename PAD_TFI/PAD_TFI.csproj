@@ -113,13 +113,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
     <Content Include="App_Data\PAD.mdf" />
     <Content Include="App_Data\PAD_log.ldf">
       <DependentUpon>PAD.mdf</DependentUpon>
     </Content>
     <Content Include="Carrito.aspx" />
-    <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -174,13 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
@@ -189,14 +180,8 @@
     <Compile Include="Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Controladores\ControladorCarrito.cs" />
+    <Compile Include="Controladores\ControladorPrincipal.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -204,6 +189,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dominio\CarritoDeProductos.cs" />
     <Compile Include="Dominio\CategoriaSet.cs" />
     <Compile Include="Dominio\ClienteSet.cs" />
     <Compile Include="Dominio\DescuentoSet.cs" />
@@ -211,7 +197,7 @@
     <Compile Include="Dominio\LineaVentaSet.cs" />
     <Compile Include="Dominio\LocalidadSet.cs" />
     <Compile Include="Dominio\MarcaSet.cs" />
-    <Compile Include="Dominio\Modelo.cs" />
+    <Compile Include="Dominio\Model.cs" />
     <Compile Include="Dominio\PagoSet.cs" />
     <Compile Include="Dominio\ProductoSet.cs" />
     <Compile Include="Dominio\ProvinciaSet.cs" />
@@ -234,12 +220,14 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

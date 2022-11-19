@@ -6,5 +6,11 @@ using System.Threading.Tasks;
 
 namespace PAD_TFI.Interfaces {
 	public interface IControladorPrincipal {
+
+		string[] CargarCategorias();
+		void CargarTabla();
+
+		void FiltrarTabla(string categoria);
+
 	}
 }
