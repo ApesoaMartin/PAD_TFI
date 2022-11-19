@@ -189,7 +189,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Dominio\CarritoDeProductos.cs" />
     <Compile Include="Dominio\CategoriaSet.cs" />
     <Compile Include="Dominio\ClienteSet.cs" />
     <Compile Include="Dominio\DescuentoSet.cs" />
