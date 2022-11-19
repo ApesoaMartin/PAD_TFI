@@ -196,6 +196,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controladores\ControladorCarrito.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -203,10 +204,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dominio\CategoriaSet.cs" />
+    <Compile Include="Dominio\ClienteSet.cs" />
+    <Compile Include="Dominio\DescuentoSet.cs" />
+    <Compile Include="Dominio\DireccionSet.cs" />
+    <Compile Include="Dominio\LineaVentaSet.cs" />
+    <Compile Include="Dominio\LocalidadSet.cs" />
+    <Compile Include="Dominio\MarcaSet.cs" />
     <Compile Include="Dominio\Modelo.cs" />
+    <Compile Include="Dominio\PagoSet.cs" />
+    <Compile Include="Dominio\ProductoSet.cs" />
+    <Compile Include="Dominio\ProvinciaSet.cs" />
+    <Compile Include="Dominio\VendedorSet.cs" />
+    <Compile Include="Dominio\VentaSet.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICarrito.cs" />
+    <Compile Include="Interfaces\IControladorCarrito.cs" />
+    <Compile Include="Interfaces\IControladorPrincipal.cs" />
+    <Compile Include="Interfaces\IPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -228,7 +245,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
