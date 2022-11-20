@@ -11,8 +11,19 @@ namespace PAD_TFI {
 
 		private IControladorCarrito _controlador;
 
-		protected void Page_Load(object sender, EventArgs e) {
-
+		protected void Page_Load(object sender, EventArgs e) 
+		{
+			List<string> localidades = new List<string> { "","0","1","2", "3","4", "5" };
+			List<string> provincias = new List<string> { "","A", "B", "C", "D", "E", "F" };
+			//foreach (var item in datos)
+			//{
+			//    localidadSL.Items.Add(item);
+			//}
+			localidadSL.DataSource = localidades;
+			provinciaSL.DataSource = provincias;
+			Page.DataBind();
 		}
-	}
+
+
+    }
 }
