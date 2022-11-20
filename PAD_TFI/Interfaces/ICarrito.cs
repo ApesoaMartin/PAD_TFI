@@ -18,6 +18,10 @@ namespace PAD_TFI.Interfaces {
 		string ObtenerAltura();
 		string ObtenerPiso();
 		string ObtenerDpto();
+		void SetearURLPago(string url);
+		void AgregarProducto(string urlImagen, string desccripcion, string precioUnitario, string descuento, string cantidad, string precioFinal);
+		void ActualizarPrecioFinal(string total);
+
 
 	}
 }

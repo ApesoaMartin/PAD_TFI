@@ -124,5 +124,10 @@ namespace PAD_TFI.Controladores {
 		public int GetCantidad(int productoId) {
 			return _carrito.ContainsKey(productoId) ? _carrito[productoId] : 0;
 		}
-	}
+
+        public Dictionary<int, int> ObtenerCarrito()
+        {
+			return _carrito;
+        }
+    }
 }

@@ -16,9 +16,11 @@ namespace PAD_TFI.Interfaces {
 
 		bool ConfirmarCompra();
 
-		string ObtenerURLPago();
-
 		void SetearVista(ICarrito vista);
+
+		void ObtenerCarrito();
+
+		void CargarListadoDeProductos();
 
 	}
 }

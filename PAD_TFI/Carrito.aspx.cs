@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace PAD_TFI {
@@ -15,14 +16,20 @@ namespace PAD_TFI {
         public Carrito()
         {
 			_controlador = ControladorCarrito.Instance;
-            
+            _controlador.SetearVista(this);
+
         }
                 
 		protected void Page_Load(object sender, EventArgs e) 
 		{
-            _controlador.SetearVista(this);
+            
+            AgregarCabeceras();
+            _controlador.ObtenerCarrito();
+            _controlador.CargarListadoDeProductos();
             if (!IsPostBack)
             {
+                
+                ConfirmacionPanel.Visible = true;
                 PagarPanel.Visible = false;
                 provinciaSL.DataSource = _controlador.ObtenerProvincias();
                 localidadSL.Enabled = false;
@@ -67,7 +74,7 @@ namespace PAD_TFI {
             }
             else
             {
-                pagarBTN.PostBackUrl = _controlador.ObtenerURLPago();
+                ConfirmacionPanel.Visible = false;
                 PagarPanel.Visible = true;
             }
         }
@@ -116,5 +123,109 @@ namespace PAD_TFI {
         {
             return dptoTB.Text;
         }
+
+        public void SetearURLPago(string url)
+        {
+            pagarBTN.PostBackUrl = url;
+        }
+        public void AgregarCabeceras()
+        {
+            TableRow fila = new TableRow();
+
+            TableCell imagenProducto = new TableCell();
+            var div = new HtmlGenericControl("div");
+            div.Controls.Add(new Label() { Text = "Imagen" });
+            imagenProducto.Controls.Add(div);
+            fila.Cells.Add(imagenProducto);
+
+            TableCell descripcionProducto = new TableCell();
+            var div1 = new HtmlGenericControl("div");
+            div1.Controls.Add(new Label() { Text = "Descripción" });
+            descripcionProducto.Controls.Add(div1);
+            fila.Cells.Add(descripcionProducto);
+
+
+            TableCell precioUnitarioProducto = new TableCell();
+            var div2 = new HtmlGenericControl("div");
+            div2.Controls.Add(new Label() { Text = "Precio Unitario" });
+            precioUnitarioProducto.Controls.Add(div2);
+            fila.Cells.Add(precioUnitarioProducto);
+
+            TableCell descuentoProducto = new TableCell();
+            var div3 = new HtmlGenericControl("div");
+            div3.Controls.Add(new Label() { Text = "Descuento" });
+            descuentoProducto.Controls.Add(div3);
+            fila.Cells.Add(descuentoProducto);
+
+            TableCell cantidadProducto = new TableCell();
+            var div4 = new HtmlGenericControl("div");
+            div4.Controls.Add(new Label() { Text = "Unidades" });
+            cantidadProducto.Controls.Add(div4);
+            fila.Cells.Add(cantidadProducto);
+
+            TableCell totalProducto = new TableCell();
+            var div5 = new HtmlGenericControl("div");
+            div5.Controls.Add(new Label() { Text = "Costo Producto" });
+            totalProducto.Controls.Add(div5);
+            fila.Cells.Add(totalProducto);
+
+            ProductsTable.Rows.Add(fila);
+        }
+        public void AgregarProducto(string urlImagen, string desccripcion, string precioUnitario,string descuento, string cantidad, string precioFinal)
+        {
+            TableRow fila = new TableRow();
+
+            TableCell imagenProducto = new TableCell();
+            System.Web.UI.WebControls.Image imagen = new System.Web.UI.WebControls.Image() { ImageUrl = urlImagen, Width = new Unit(64, UnitType.Pixel), Height = new Unit(64, UnitType.Pixel), ImageAlign = ImageAlign.Middle };
+            imagenProducto.Controls.Add(imagen);
+            
+            fila.Cells.Add(imagenProducto);
+
+            TableCell descripcionProducto = new TableCell();
+            var div = new HtmlGenericControl("div");
+            div.Controls.Add(new Label() { Text = desccripcion });
+            descripcionProducto.Controls.Add(div);
+            fila.Cells.Add(descripcionProducto);
+
+
+            TableCell precioUnitarioProducto = new TableCell();
+            var div2 = new HtmlGenericControl("div");
+            div2.Controls.Add(new Label() { Text = precioUnitario });
+            precioUnitarioProducto.Controls.Add(div2);
+            fila.Cells.Add(precioUnitarioProducto);
+
+            TableCell descuentoProducto = new TableCell();
+            var div3 = new HtmlGenericControl("div");
+            div3.Controls.Add(new Label() { Text = descuento });
+            descuentoProducto.Controls.Add(div3);
+            fila.Cells.Add(descuentoProducto);
+
+            TableCell cantidadProducto = new TableCell();
+            var div4 = new HtmlGenericControl("div");
+            div4.Controls.Add(new Label() { Text = cantidad });
+            cantidadProducto.Controls.Add(div4);
+            fila.Cells.Add(cantidadProducto);
+
+            TableCell totalProducto = new TableCell();
+            var div5 = new HtmlGenericControl("div");
+            div5.Controls.Add(new Label() { Text = precioFinal });
+            totalProducto.Controls.Add(div5);
+            fila.Cells.Add(totalProducto);
+
+            ProductsTable.Rows.Add(fila);
+        }
+
+        public void ActualizarPrecioFinal(string total)
+        {
+            TableRow fila = new TableRow();
+            TableCell costoTotal = new TableCell();
+            var div = new HtmlGenericControl("div");
+            div.Controls.Add(new Label() { Text = $"Total a Pagar = {total}" });
+            costoTotal.Controls.Add(div);
+            fila.Cells.Add(costoTotal);
+
+            ProductsTable.Rows.Add(fila);
+        }
+
     }
 }

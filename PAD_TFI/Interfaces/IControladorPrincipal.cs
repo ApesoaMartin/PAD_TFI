@@ -1,4 +1,6 @@
-﻿namespace PAD_TFI.Interfaces {
+﻿using System.Collections.Generic;
+
+namespace PAD_TFI.Interfaces {
 	public interface IControladorPrincipal {
 
 		string[] CargarCategorias();
@@ -10,6 +12,8 @@
 		void AgregarACarrito(int productoId, int cantidad);
 		void QuitarDeCarrito(int productoId, int cantidad);
 		int GetCantidad(int productoId);
+
+		Dictionary<int, int> ObtenerCarrito();
 
 	}
 }

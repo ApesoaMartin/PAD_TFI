@@ -2,23 +2,22 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-        <asp:Panel ID="PagarPanel" runat="server" BackColor="#E4E4E4" Height="60">
+        <asp:Panel ID="PagarPanel" runat="server" BackColor="#E4E4E4" Height="124px">
             <h2 style="font-family: 'Arial Black'; font-size: x-large; font-weight: bold; font-style: oblique; color: #339933; vertical-align: middle; text-align: center; ">Confirmarción Exitosa</h2>
             <asp:Label ID="Label6" runat="server" Width="938px"></asp:Label>
             <asp:Button ID="pagarBTN" runat="server" Text="Pagar" BackColor="#99CCFF" BorderColor="#6699FF" BorderStyle="Solid" BorderWidth="5px" Font-Bold="True" Font-Size="14pt" Height="38px" Width="184px" ForeColor="White" />
 
         </asp:Panel>
 
-
     <div class="carrito-container" id="carrito">
-        <asp:Table runat="server">
+        <asp:Table runat="server" ID="ProductsTable" CellPadding="4" BorderStyle="Solid" BorderWidth="2px" CellSpacing="2" BackColor="Silver" BorderColor="#666666" HorizontalAlign="Left" Width="1171px">
 
         </asp:Table>
     </div>
     <div class="comprador-info" id="comprador">
         <asp:Panel ID="Panel1" runat="server" BackColor="#E4E4E4">
             <br />
-            <h2 style="font-family: 'Arial Black'; font-size: large; font-weight: bold; font-style: normal; color: #339933; vertical-align: middle; text-align: center; text-decoration: underline;">Datos del Comprador</h2>
+            <h2 style="font-family: 'Arial Black'; font-size: large; font-weight: bold; font-style: normal; color: #CC9900; vertical-align: middle; text-align: center; text-decoration: underline;">Datos del Comprador</h2>
             <asp:Label ID="nombreLB" runat="server" Text="Nombre: " Font-Bold="True" Font-Size="16pt"></asp:Label>
             <asp:TextBox ID="nombreTB" runat="server" Width="291px" ></asp:TextBox>
             <asp:Label ID="Label1" runat="server" Width="40"></asp:Label>
@@ -52,7 +51,7 @@
             </asp:DropDownList>
             <asp:Label ID="Label2" runat="server" Width="93px"></asp:Label>
             <asp:Label ID="localidadLB" runat="server" Font-Bold="True" Font-Size="16pt" Text="Localidad: "></asp:Label>
-            <asp:DropDownList ID="localidadSL" runat="server" AutoPostBack="true" OnSelectedIndexChanged="localidadSL_SelectedIndexChanged" Font-Size="12pt">
+            <asp:DropDownList ID="localidadSL" runat="server" AutoPostBack="true" OnSelectedIndexChanged="localidadSL_SelectedIndexChanged" Font-Size="12pt" Width="190px">
                 </asp:DropDownList>
             </p>
             

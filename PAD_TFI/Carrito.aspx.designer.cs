@@ -42,6 +42,15 @@ namespace PAD_TFI
         protected global::System.Web.UI.WebControls.Button pagarBTN;
 
         /// <summary>
+        /// Control ProductsTable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table ProductsTable;
+
+        /// <summary>
         /// Control Panel1.
         /// </summary>
         /// <remarks>

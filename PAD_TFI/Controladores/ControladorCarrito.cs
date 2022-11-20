@@ -4,17 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MercadoPago.Client.Preference;
+using MercadoPago.Config;
+using MercadoPago.Resource.Preference;
 
 namespace PAD_TFI.Controladores {
 	public class ControladorCarrito : IControladorCarrito {
 
-		private ICarrito _carrito;
+		private ICarrito _vista;
 
         private int _provinciaId;
         private int _localidadId;
 
         private List<string> _provincias;
         private List<string> _localidades = new List<string>();
+
+        private Dictionary<int, int> _carrito;
 
         #region Singleton
 
@@ -23,7 +28,7 @@ namespace PAD_TFI.Controladores {
 
         public ControladorCarrito()
         {
-
+            MercadoPagoConfig.AccessToken = "TEST-6986966527076860-111318-4cc8718b374ab28a1fb4700b2a7c21ba-72090181";
         }
 
         public static ControladorCarrito Instance
@@ -47,8 +52,14 @@ namespace PAD_TFI.Controladores {
 
         public void SetearVista(ICarrito vista)
         {
-            _carrito = vista;
+            _vista = vista;
         }
+
+        public void ObtenerCarrito()
+        {
+            _carrito = ControladorPrincipal.Instance.ObtenerCarrito();
+        }
+
 
         public List<string> ObtenerProvincias()
         {
@@ -102,17 +113,17 @@ namespace PAD_TFI.Controladores {
 
         public bool ConfirmarCompra()
         {
-            string nombre = _carrito.ObtenerNombre();
-            string apellido = _carrito.ObtenerApellido();
-            string dni = _carrito.ObtenerDNI();
-            string telefono = _carrito.ObtenerTelefono();
-            string correo = _carrito.ObtenerCorreo();
-            string calle = _carrito.ObtenerCalle();
-            string altura = _carrito.ObtenerAltura();
+            string nombre = _vista.ObtenerNombre();
+            string apellido = _vista.ObtenerApellido();
+            string dni = _vista.ObtenerDNI();
+            string telefono = _vista.ObtenerTelefono();
+            string correo = _vista.ObtenerCorreo();
+            string calle = _vista.ObtenerCalle();
+            string altura = _vista.ObtenerAltura();
             if(nombre != "" && apellido != "" && dni != "" && telefono != "" && correo != "" && calle != "" && altura != "")
             {
-                string piso = _carrito.ObtenerPiso();
-                string dpto = _carrito.ObtenerDpto();
+                string piso = _vista.ObtenerPiso();
+                string dpto = _vista.ObtenerDpto();
                 if (_localidadId >= 0)
                 {
                     InsertarCompraEnDB(nombre,apellido,dni,telefono, correo,calle,altura,piso,dpto);
@@ -138,8 +149,8 @@ namespace PAD_TFI.Controladores {
                 DireccionSet direccion = new DireccionSet();
                 direccion.Calle = calle;
                 direccion.Numero = (short)int.Parse(altura);
-                direccion.Piso = (short)int.Parse(piso);
-                direccion.Dpto = byte.Parse(dpto);
+                if(piso!= "")direccion.Piso = (short)int.Parse(piso);
+                if(dpto != "")direccion.Dpto = byte.Parse(dpto);
                 direccion.LocalidadSet = localidad;
 
                 bd.DireccionSet.Add(direccion);
@@ -149,7 +160,7 @@ namespace PAD_TFI.Controladores {
             }
             using (var bd = new BaseDeDatos())
             {
-                DireccionSet direccion =  bd.DireccionSet.Last();
+                DireccionSet direccion =(from dir in bd.DireccionSet orderby dir.Id descending select dir).ToList()[0];
                 ClienteSet cliente = new ClienteSet();
                 cliente.Nombres = nombre;
                 cliente.Apellidos = apellido;
@@ -166,14 +177,58 @@ namespace PAD_TFI.Controladores {
 
         private void CrearPagoEnMercadoLibre()
         {
+            List<PreferenceItemRequest> items = new List<PreferenceItemRequest>();
 
+            using (var bd = new BaseDeDatos())
+            {
+                foreach (var item in _carrito)
+                {
+                    ProductoSet producto = bd.ProductoSet.Find(item.Key);
+
+                    PreferenceItemRequest itemRequest = new PreferenceItemRequest
+                    {
+                        Title = producto.Descripcion,
+                        Quantity = item.Value,
+                        CurrencyId = "ARS",
+                        UnitPrice = producto.PrecioUnitario,
+                    };
+                    items.Add(itemRequest);
+                }
+            }
+                
+
+
+            var request = new PreferenceRequest
+            {
+                Items = items,
+                BackUrls = new PreferenceBackUrlsRequest
+                {
+                    Success = HttpContext.Current.Request.Url.AbsoluteUri,
+                },
+            };
+
+            // Crea la preferencia usando el client
+            var client = new PreferenceClient();
+            Preference preference = client.Create(request);
+
+            _vista.SetearURLPago(preference.InitPoint);
         }
 
-
-        public string ObtenerURLPago()
+        public void CargarListadoDeProductos()
         {
-            //terminar
-            return null;
+            double costoTotal = 0.0d;
+            using (var bd = new BaseDeDatos())
+            {
+                foreach (var item in _carrito)
+                {
+                    ProductoSet producto = bd.ProductoSet.Find(item.Key);
+                    double precioFinal = (double)producto.PrecioUnitario * item.Value;
+                    costoTotal += precioFinal;
+                    _vista.AgregarProducto(producto.Imagen, producto.Descripcion, $"$ {producto.PrecioUnitario.ToString("N")}", "0", item.Value.ToString(), $"$ {precioFinal.ToString("N")}");
+                }
+
+            }
+            _vista.ActualizarPrecioFinal($"$ {costoTotal.ToString("N")}");
         }
     }
 }
