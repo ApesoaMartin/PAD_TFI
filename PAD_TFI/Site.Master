@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">PAD-TFI</a>
+                    <a class="navbar-brand" runat="server" href="~/">PAD - TFI</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -62,7 +62,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Venta de productos deportivos </p>
             </footer>
         </div>
 

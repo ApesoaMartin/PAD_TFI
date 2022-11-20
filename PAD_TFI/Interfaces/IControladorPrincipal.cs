@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PAD_TFI.Interfaces {
+﻿namespace PAD_TFI.Interfaces {
 	public interface IControladorPrincipal {
 
 		string[] CargarCategorias();
 		void CargarTabla();
 
 		void FiltrarTabla(string categoria);
+		void VincularPagina(IPrincipal pagina);
+
+		void AgregarACarrito(int productoId, int cantidad);
+		void QuitarDeCarrito(int productoId, int cantidad);
+		int GetCantidad(int productoId);
 
 	}
 }
