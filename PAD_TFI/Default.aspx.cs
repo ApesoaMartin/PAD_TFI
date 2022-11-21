@@ -63,66 +63,74 @@ namespace PAD_TFI {
 			_ultimaFila = new TableRow();
 		}
 
-		public void AgregarCelda(int pId, string imageUrl, string descripcion, string marca, string precio, int cantidad, string precioConDescuento=null, string descuento = null) {
+		private HtmlGenericControl GetLineBreak() {
+			var space = new HtmlGenericControl("div");
+			space.Attributes.Add("class", "lineBreak");
+			return space;
+		}
+
+		public void AgregarCelda(int pId, string imageUrl, string descripcion, string marca, string precio, int cantidad, string infoDescuento, string precioConDescuento=null, string descuento = null) {
 			var celda = new TableCell();
 			var div = new HtmlGenericControl("div");
 
-			div.Controls.Add(new System.Web.UI.WebControls.Image() { ImageUrl = imageUrl, Width = new Unit(80, UnitType.Percentage), ImageAlign = ImageAlign.Middle });
+			if (!string.IsNullOrWhiteSpace(infoDescuento))
+				div.Controls.Add(new Label() { Text = infoDescuento, CssClass = "prodInfoDescuento" });
 
-			div.Controls.Add(new HtmlGenericControl("br"));
-			div.Controls.Add(new Label() { Text = descripcion });
+			div.Controls.Add(new System.Web.UI.WebControls.Image() {
+				ImageUrl = imageUrl,
+				Width = new Unit(80, UnitType.Percentage),
+				ImageAlign = ImageAlign.Middle,
+				CssClass = "productoImg"
+			});
 
-			div.Controls.Add(new HtmlGenericControl("br"));
-			div.Controls.Add(new Label() { Text = marca });
-
+			div.Controls.Add(GetLineBreak());
+			div.Controls.Add(new Label() { Text = descripcion, CssClass="prodDescripcion" });
+			div.Controls.Add(GetLineBreak());
+			div.Controls.Add(new Label() { Text = marca, CssClass = "prodMarca" });
+			div.Controls.Add(GetLineBreak());
 			if (descuento == null) {
-				div.Controls.Add(new HtmlGenericControl("br"));
-				div.Controls.Add(new Label() { Text = precio });
+				div.Controls.Add(new Label() { Text = precio, CssClass = "prodPrecio" });
 			} else {
-				div.Controls.Add(new HtmlGenericControl("br"));
-				var tempLabel = new Label() { Text = precio };
+				var tempLabel = new Label() { Text = precio, CssClass = "prodPrecioDescontado" };
 				tempLabel.ForeColor = System.Drawing.Color.Red;
 				tempLabel.Font.Strikeout = true;
 				div.Controls.Add(tempLabel);
 
-				div.Controls.Add(new HtmlGenericControl("br"));
-				div.Controls.Add(new Label() { Text = precioConDescuento });
-
-				div.Controls.Add(new Label() { Width = new Unit(25, UnitType.Pixel) });
-
-				tempLabel = new Label() { Text = descuento };
+				tempLabel = new Label() { Text = descuento, CssClass = "prodDescuento" };
 				tempLabel.ForeColor = System.Drawing.Color.Green;
 				tempLabel.Font.Bold = true;
 				div.Controls.Add(tempLabel);
+
+				div.Controls.Add(GetLineBreak());
+				div.Controls.Add(new Label() { Text = precioConDescuento, CssClass = "prodPrecioConDescuento" });
 			}
 
-			div.Controls.Add(new HtmlGenericControl("br"));
+			div.Controls.Add(GetLineBreak());
 
 			var botones = new HtmlGenericControl("div");
 
 			var tempLink = new HyperLink() {
 				ID = $"Minus{pId}",
 				Text = "-",
+				CssClass="botonMenos",
 				ForeColor=Color.Black,
 				Width = new Unit(25, UnitType.Pixel),
 				BackColor = Color.Red,
 				NavigateUrl = categoria == null ? $"~/Default?a=m&i={pId}" : $"~/Default?cat={categoria}&a=m&i={pId}"
 			};
+
 			tempLink.Style.Add("text-align", "center");
 			tempLink.Font.Bold = true;
 			tempLink.Font.Size = new FontUnit(FontSize.Large);
 
 			botones.Controls.Add(tempLink);
 
-			botones.Controls.Add(new Label() { Width=new Unit(50, UnitType.Pixel) });
-
-			botones.Controls.Add(new Label() { Text = cantidad.ToString() });
-
-			botones.Controls.Add(new Label() { Width = new Unit(50, UnitType.Pixel) });
+			botones.Controls.Add(new Label() { Text = cantidad.ToString(), CssClass="prodCantidad"});
 
 			tempLink = new HyperLink() {
 				ID = $"Plus{pId}",
 				Text = "+",
+				CssClass = "botonMas",
 				Width = new Unit(25, UnitType.Pixel),
 				BackColor = Color.Green,
 				ForeColor = Color.White,
@@ -136,10 +144,8 @@ namespace PAD_TFI {
 
 			div.Controls.Add(botones);
 
+			celda.CssClass = "celdaProducto";
 			celda.Width = 200;
-			celda.BorderStyle = BorderStyle.Solid;
-			celda.BorderWidth = 2;
-			celda.BorderColor = System.Drawing.Color.Black;
 			celda.Controls.Add(div);
 
 			_ultimaFila.Cells.Add(celda);

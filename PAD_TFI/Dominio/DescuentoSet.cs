@@ -19,6 +19,8 @@ namespace PAD_TFI.Dominio
 
         public short CompraMinima { get; set; }
 
+		public string Descripcion { get; set; }
+
         public int? Producto_Id { get; set; }
 
         public int? Categoria_Id { get; set; }

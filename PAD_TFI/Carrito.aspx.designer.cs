@@ -7,13 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace PAD_TFI
-{
-
-
-    public partial class Carrito
-    {
-
+namespace PAD_TFI {
+    
+    
+    public partial class Carrito {
+        
         /// <summary>
         /// Control PagarPanel.
         /// </summary>
@@ -22,7 +20,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PagarPanel;
-
+        
         /// <summary>
         /// Control Label6.
         /// </summary>
@@ -31,7 +29,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label6;
-
+        
         /// <summary>
         /// Control pagarBTN.
         /// </summary>
@@ -40,7 +38,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button pagarBTN;
-
+        
         /// <summary>
         /// Control ProductsTable.
         /// </summary>
@@ -49,7 +47,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table ProductsTable;
-
+        
         /// <summary>
         /// Control Panel1.
         /// </summary>
@@ -58,7 +56,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel1;
-
+        
         /// <summary>
         /// Control nombreLB.
         /// </summary>
@@ -67,7 +65,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label nombreLB;
-
+        
         /// <summary>
         /// Control nombreTB.
         /// </summary>
@@ -76,7 +74,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox nombreTB;
-
+        
         /// <summary>
         /// Control Label1.
         /// </summary>
@@ -85,7 +83,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-
+        
         /// <summary>
         /// Control apellidoLB.
         /// </summary>
@@ -94,7 +92,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label apellidoLB;
-
+        
         /// <summary>
         /// Control apellidoTB.
         /// </summary>
@@ -103,7 +101,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox apellidoTB;
-
+        
         /// <summary>
         /// Control dniLB.
         /// </summary>
@@ -112,7 +110,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label dniLB;
-
+        
         /// <summary>
         /// Control dniTB.
         /// </summary>
@@ -121,7 +119,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox dniTB;
-
+        
         /// <summary>
         /// Control Label3.
         /// </summary>
@@ -130,7 +128,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-
+        
         /// <summary>
         /// Control telefonoLB.
         /// </summary>
@@ -139,7 +137,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label telefonoLB;
-
+        
         /// <summary>
         /// Control telefonoTB.
         /// </summary>
@@ -148,7 +146,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox telefonoTB;
-
+        
         /// <summary>
         /// Control correoLB.
         /// </summary>
@@ -157,7 +155,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label correoLB;
-
+        
         /// <summary>
         /// Control correoTB.
         /// </summary>
@@ -166,7 +164,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox correoTB;
-
+        
         /// <summary>
         /// Control calleLB.
         /// </summary>
@@ -175,7 +173,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label calleLB;
-
+        
         /// <summary>
         /// Control calleTB.
         /// </summary>
@@ -184,7 +182,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox calleTB;
-
+        
         /// <summary>
         /// Control Label4.
         /// </summary>
@@ -193,7 +191,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
-
+        
         /// <summary>
         /// Control alturaLB.
         /// </summary>
@@ -202,7 +200,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label alturaLB;
-
+        
         /// <summary>
         /// Control alturaTB.
         /// </summary>
@@ -211,7 +209,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox alturaTB;
-
+        
         /// <summary>
         /// Control pisoLB.
         /// </summary>
@@ -220,7 +218,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label pisoLB;
-
+        
         /// <summary>
         /// Control pisoTB.
         /// </summary>
@@ -229,7 +227,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox pisoTB;
-
+        
         /// <summary>
         /// Control Label7.
         /// </summary>
@@ -238,7 +236,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
-
+        
         /// <summary>
         /// Control dptoLB.
         /// </summary>
@@ -247,7 +245,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label dptoLB;
-
+        
         /// <summary>
         /// Control dptoTB.
         /// </summary>
@@ -256,7 +254,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox dptoTB;
-
+        
         /// <summary>
         /// Control provinciaLB.
         /// </summary>
@@ -265,7 +263,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label provinciaLB;
-
+        
         /// <summary>
         /// Control provinciaSL.
         /// </summary>
@@ -274,7 +272,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList provinciaSL;
-
+        
         /// <summary>
         /// Control Label2.
         /// </summary>
@@ -283,7 +281,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-
+        
         /// <summary>
         /// Control localidadLB.
         /// </summary>
@@ -292,7 +290,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label localidadLB;
-
+        
         /// <summary>
         /// Control localidadSL.
         /// </summary>
@@ -301,7 +299,7 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList localidadSL;
-
+        
         /// <summary>
         /// Control ConfirmacionPanel.
         /// </summary>
@@ -310,16 +308,16 @@ namespace PAD_TFI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel ConfirmacionPanel;
-
+        
         /// <summary>
-        /// Control Label5.
+        /// Control lblError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
-
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
         /// <summary>
         /// Control confirmacionBTN.
         /// </summary>

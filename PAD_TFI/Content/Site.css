@@ -1,7 +1,8 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	background-image: url("background.png");
 }
 
 /* Wrapping element */
@@ -18,6 +19,120 @@ textarea {
     max-width: 280px;
     }
 
+footer {
+	background-color: white;
+	border: 5px solid white;
+	border-radius: 5px;
+}
+
+/* --- Pagina principal --- */
+.lineBreak {
+	width: 100%;
+	height: 20px;
+}
+
+.listaCategorias {
+	background-color: lightblue;
+	border-radius: 5px;
+	border: 5px solid black;
+	padding: 10px;
+}
+
+.prodInfoDescuento {
+	position: relative;
+	display: block;
+	width: 100%+20px;
+	margin: -10px;
+	background: linear-gradient(darkslategray, darkgreen);
+	color: lightgreen;
+	font-style: italic;
+	font-size: large;
+	font-weight: bold;
+	text-align:center;
+}
+
+.productosDiv {
+	background-color: lightblue;
+	border-radius: 5px;
+	border: 5px solid black;
+	padding: 10px;
+}
+
+.celdaProducto {
+	background-color: white;
+	padding: 10px;
+	border: 5px solid black;
+	border-radius: 5px;
+}
+
+.productos {
+	border-collapse: separate;
+	border-spacing: 5px;
+}
+
+.productoImg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.botonMas {
+	border-radius: 8px;
+	float:right;
+}
+
+.botonMenos {
+	border-radius: 8px;
+	float:left;
+}
+
+.prodDescripcion {
+	font-weight: bold;
+	text-align: justify;
+}
+
+.prodCantidad {
+	border: 2px solid black;
+	border-radius: 2px;
+	font-size: large;
+	padding: 10px;
+	margin-left:25%;
+}
+
+.prodMarca {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	text-align: center;
+}
+
+.prodPrecio {
+	font-weight: bold;
+	display:flex;
+	justify-content: center;
+	align-self: center;
+	text-align: center;
+}
+
+.prodPrecioDescontado {
+	font-weight: bold;
+	float: left;
+}
+
+.prodPrecioConDescuento {
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	text-align: center;
+}
+
+.prodDescuento {
+	font-weight: bold;
+	float: right;
+}
+
+/* ----------------------- */
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

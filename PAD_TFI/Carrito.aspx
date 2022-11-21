@@ -59,7 +59,7 @@
             <br />
         </asp:Panel>
         <asp:Panel ID="ConfirmacionPanel" runat="server" BackColor="#E4E4E4" Height="60">
-            <asp:Label ID="Label5" runat="server" Width="883px"></asp:Label>
+            <asp:Label ID="lblError" runat="server" Width="883px" Font-Bold="True" ForeColor="#CC0000"></asp:Label>
             <asp:Button ID="confirmacionBTN" runat="server" Text="Confirmar Compra" BackColor="#009900" BorderColor="#006600" BorderStyle="Solid" BorderWidth="5px" Font-Bold="True" Font-Size="14pt" Height="38px" Width="239px" OnClick="confirmacionBTN_Click" />
 
         </asp:Panel>

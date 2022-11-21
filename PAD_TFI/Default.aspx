@@ -1,20 +1,28 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PAD_TFI._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-	<asp:Label ID="Label1" runat="server" Text="Categorías:"></asp:Label>
-	<div>
-		<asp:Repeater ID="CategoriaRepeater" runat="server">
-			<ItemTemplate>
-				<asp:Button ID="RepeaterButton" runat="server" Text="<%#Container.DataItem%>" OnClick="Categoria_Click" />
-			</ItemTemplate>
-		</asp:Repeater>
-		<asp:Button ID="btnLimpiarFiltro" runat="server" Text="Todas" OnClick="BtnLimpiarFiltro_Click" />
+	<br />
+	<div class="listaCategorias">
+		<asp:Label ID="Label1" runat="server" Font-Size="Large" Font-Bold="true" Width="100%" Text="Categorías:"></asp:Label>
+		<div></div>
+		<div>
+			<asp:Repeater ID="CategoriaRepeater" runat="server">
+				<ItemTemplate>
+					<asp:Button ID="RepeaterButton" runat="server" Text="<%#Container.DataItem%>" OnClick="Categoria_Click" />
+				</ItemTemplate>
+			</asp:Repeater>
+			<asp:Button ID="btnLimpiarFiltro" runat="server" Text="Todas" OnClick="BtnLimpiarFiltro_Click" />
+		</div>
 	</div>
-	<asp:Label ID="Label2" runat="server" Text="Productos:"></asp:Label>
-	<div>
-		<asp:Table ID="tablaProductos" runat="server">
-		</asp:Table>
+	<br />
+	<br />
+	<div class="productosDiv">
+		<asp:Label ID="Label2" runat="server" Font-Bold="true" Font-Size="Large" Text="Productos:"></asp:Label>
+		<div class="espacio"></div>
+		<div class="tablaDiv">
+			<asp:Table CssClass="productos" ID="tablaProductos" runat="server">
+			</asp:Table>
+		</div>
 	</div>
 
     <!--<div class="jumbotron">

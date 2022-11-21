@@ -62,7 +62,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Venta de productos deportivos </p>
+                <p>&copy; <%: DateTime.Now.Year %> - Venta de productos deportivos - Apesoa Martin y Bazán Ezequiel</p>
             </footer>
         </div>
 

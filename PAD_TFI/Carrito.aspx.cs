@@ -70,11 +70,12 @@ namespace PAD_TFI {
             bool resultado = _controlador.ConfirmarCompra();
             if (!resultado)
             {
-                Response.Write("alert('Campos Invalidos')");
+				lblError.Text = "Por favor revisar los campos";
             }
             else
             {
-                ConfirmacionPanel.Visible = false;
+				lblError.Text = "";
+				ConfirmacionPanel.Visible = false;
                 PagarPanel.Visible = true;
             }
         }
@@ -151,21 +152,21 @@ namespace PAD_TFI {
             precioUnitarioProducto.Controls.Add(div2);
             fila.Cells.Add(precioUnitarioProducto);
 
-            TableCell descuentoProducto = new TableCell();
+			TableCell cantidadProducto = new TableCell();
+			var div4 = new HtmlGenericControl("div");
+			div4.Controls.Add(new Label() { Text = "Unidades" });
+			cantidadProducto.Controls.Add(div4);
+			fila.Cells.Add(cantidadProducto);
+
+			TableCell descuentoProducto = new TableCell();
             var div3 = new HtmlGenericControl("div");
             div3.Controls.Add(new Label() { Text = "Descuento" });
             descuentoProducto.Controls.Add(div3);
             fila.Cells.Add(descuentoProducto);
 
-            TableCell cantidadProducto = new TableCell();
-            var div4 = new HtmlGenericControl("div");
-            div4.Controls.Add(new Label() { Text = "Unidades" });
-            cantidadProducto.Controls.Add(div4);
-            fila.Cells.Add(cantidadProducto);
-
             TableCell totalProducto = new TableCell();
             var div5 = new HtmlGenericControl("div");
-            div5.Controls.Add(new Label() { Text = "Costo Producto" });
+            div5.Controls.Add(new Label() { Text = "Subtotal" });
             totalProducto.Controls.Add(div5);
             fila.Cells.Add(totalProducto);
 
@@ -194,17 +195,17 @@ namespace PAD_TFI {
             precioUnitarioProducto.Controls.Add(div2);
             fila.Cells.Add(precioUnitarioProducto);
 
-            TableCell descuentoProducto = new TableCell();
+			TableCell cantidadProducto = new TableCell();
+			var div4 = new HtmlGenericControl("div");
+			div4.Controls.Add(new Label() { Text = cantidad });
+			cantidadProducto.Controls.Add(div4);
+			fila.Cells.Add(cantidadProducto);
+
+			TableCell descuentoProducto = new TableCell();
             var div3 = new HtmlGenericControl("div");
             div3.Controls.Add(new Label() { Text = descuento });
             descuentoProducto.Controls.Add(div3);
             fila.Cells.Add(descuentoProducto);
-
-            TableCell cantidadProducto = new TableCell();
-            var div4 = new HtmlGenericControl("div");
-            div4.Controls.Add(new Label() { Text = cantidad });
-            cantidadProducto.Controls.Add(div4);
-            fila.Cells.Add(cantidadProducto);
 
             TableCell totalProducto = new TableCell();
             var div5 = new HtmlGenericControl("div");

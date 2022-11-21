@@ -120,7 +120,14 @@ namespace PAD_TFI.Controladores {
             string correo = _vista.ObtenerCorreo();
             string calle = _vista.ObtenerCalle();
             string altura = _vista.ObtenerAltura();
-            if(nombre != "" && apellido != "" && dni != "" && telefono != "" && correo != "" && calle != "" && altura != "")
+
+            if(!string.IsNullOrWhiteSpace(nombre)
+				&& !string.IsNullOrWhiteSpace(apellido)
+				&& !string.IsNullOrWhiteSpace(dni)
+				&& !string.IsNullOrWhiteSpace(telefono)
+				&& !string.IsNullOrWhiteSpace(correo)
+				&& !string.IsNullOrWhiteSpace(calle)
+				&& !string.IsNullOrWhiteSpace(altura))
             {
                 string piso = _vista.ObtenerPiso();
                 string dpto = _vista.ObtenerDpto();
@@ -216,16 +223,18 @@ namespace PAD_TFI.Controladores {
 
         public void CargarListadoDeProductos()
         {
-            double costoTotal = 0.0d;
+			decimal costoTotal = 0.0m;
             using (var bd = new BaseDeDatos())
             {
-                foreach (var item in _carrito)
-                {
-                    ProductoSet producto = bd.ProductoSet.Find(item.Key);
-                    double precioFinal = (double)producto.PrecioUnitario * item.Value;
-                    costoTotal += precioFinal;
-                    _vista.AgregarProducto(producto.Imagen, producto.Descripcion, $"$ {producto.PrecioUnitario.ToString("N")}", "0", item.Value.ToString(), $"$ {precioFinal.ToString("N")}");
-                }
+				foreach (var item in _carrito) {
+					ProductoSet producto = bd.ProductoSet.Find(item.Key);
+					decimal precioFinalInicial = producto.PrecioUnitario * item.Value;
+					ControladorPrincipal.Instance.CalcularDescuento(producto, item.Value, out decimal precioFinal, out decimal descuentoTotal, out int porcentaje);
+
+					costoTotal += precioFinal;
+
+					_vista.AgregarProducto(producto.Imagen, producto.Descripcion, $"$ {producto.PrecioUnitario.ToString("N")}", $"$ {descuentoTotal.ToString("N")}", item.Value.ToString(), $"$ {precioFinal.ToString("N")}");
+				}
 
             }
             _vista.ActualizarPrecioFinal($"$ {costoTotal.ToString("N")}");

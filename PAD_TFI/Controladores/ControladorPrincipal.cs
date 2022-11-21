@@ -48,42 +48,71 @@ namespace PAD_TFI.Controladores {
 		public void CargarTabla() {
 			using (var bd = new BaseDeDatos()) {
 
-				LlenarTabla(bd.ProductoSet.Include("MarcaSet").Include("DescuentoSet"));
+				LlenarTabla(bd.ProductoSet.Include("MarcaSet").Include("DescuentoSet").Include("CategoriaSet"));
 			}
+		}
+
+		public void CalcularDescuento(ProductoSet producto, int cantidad,
+				out decimal precioTotal, out decimal descuentoTotal, out int porcentajeDescuento) {
+			var fechaActual = DateTime.Now;
+
+			precioTotal = producto.PrecioUnitario * cantidad;
+
+			descuentoTotal = 0;
+
+			foreach (var desc in producto.DescuentoSet
+									.Where((d) => d.FechaInicio <= fechaActual && d.FechaFin >= fechaActual)) {
+				descuentoTotal += (producto.PrecioUnitario * desc.Porcentaje / 100.0m) * (cantidad / desc.CompraMinima);
+			}
+
+			porcentajeDescuento = (int)(100 * descuentoTotal / precioTotal);
+			precioTotal -= descuentoTotal;
 		}
 
 		private void LlenarTabla(IEnumerable<ProductoSet> productos) {
 			_principal.IniciarTabla(COLUMNAS);
-
+			int cantidad = 0;
+			string info=null;
 			foreach (var prod in productos) {
+				cantidad = GetCantidad(prod.Id);
+				info = "";
+				foreach (var desc in prod.DescuentoSet) {
+					info += $"{desc.Descripcion}\n";
+				}
 				if (prod.DescuentoSet.Count > 0) {
-					var fechaActual = DateTime.Now;
-					decimal precioMP = 1;
-					foreach (var desc in prod.DescuentoSet
-											.Where((d) => d.FechaInicio <= fechaActual && d.FechaFin >= fechaActual)) {
-						//TODO: tener en cuenta cantidades
-						precioMP -= (desc.Porcentaje / 100.0m) * precioMP;
+					CalcularDescuento(prod, Math.Max(1, cantidad), out decimal precioTotal, out decimal descuentoTotal, out int porcentajeDescuento);
+					if (descuentoTotal > 0) {
+						_principal.AgregarCelda(
+							prod.Id,
+							prod.Imagen,
+							prod.Descripcion,
+							prod.MarcaSet.Nombre,
+							"$" + prod.PrecioUnitario.ToString("N"),
+							cantidad,
+							info,
+							"$" + precioTotal.ToString("N"),
+							string.Format("(-{0}%)", porcentajeDescuento)
+						);
+					} else {
+						_principal.AgregarCelda(
+							prod.Id,
+							prod.Imagen,
+							prod.Descripcion,
+							prod.MarcaSet.Nombre,
+							"$" + (prod.PrecioUnitario * Math.Max(1, cantidad)).ToString("N"),
+							cantidad,
+							info
+						);
 					}
-					var precio = prod.PrecioUnitario * precioMP;
-					int descuento = (int)((1 - precioMP) * 100);
-					_principal.AgregarCelda(
-						prod.Id,
-						prod.Imagen,
-						prod.Descripcion,
-						prod.MarcaSet.Nombre,
-						"$" + prod.PrecioUnitario.ToString("N"),
-						GetCantidad(prod.Id),
-						"$" + precio.ToString("N"),
-						string.Format("(-{0}%)", descuento)
-					);
 				} else {
 					_principal.AgregarCelda(
 						prod.Id,
 						prod.Imagen,
 						prod.Descripcion,
 						prod.MarcaSet.Nombre,
-						"$" + prod.PrecioUnitario.ToString("N"),
-						GetCantidad(prod.Id)
+						"$" + (prod.PrecioUnitario * Math.Max(1, cantidad)).ToString("N"),
+						cantidad,
+						info
 					);
 				}
 			}
