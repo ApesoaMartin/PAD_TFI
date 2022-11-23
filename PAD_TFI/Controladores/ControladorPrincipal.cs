@@ -179,7 +179,7 @@ namespace PAD_TFI.Controladores {
         {
 			if (ControladorCarrito.Instance.CompraCompletada())
 			{
-				//_carrito.Clear();
+				_carrito.Clear();
 
 			}
 

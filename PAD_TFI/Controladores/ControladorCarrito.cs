@@ -270,7 +270,7 @@ namespace PAD_TFI.Controladores {
 
         public bool CompraCompletada()
         {
-            if (!_pagopendiente && !FallaEnElPago)
+            if (_pagopendiente && !FallaEnElPago)
             {
                 _pagopendiente = false;
                 if(_carrito != null)_carrito.Clear();
