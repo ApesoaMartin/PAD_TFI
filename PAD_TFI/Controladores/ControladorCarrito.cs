@@ -31,7 +31,7 @@ namespace PAD_TFI.Controladores {
         private bool _pagopendiente = false;
         public bool FallaEnElPago { get; set; }
         private Preference preference;
-
+        private decimal costoTotal = 0.0m;
         public ControladorCarrito()
         {
             MercadoPagoConfig.AccessToken = "TEST-6986966527076860-111318-4cc8718b374ab28a1fb4700b2a7c21ba-72090181";
@@ -147,6 +147,7 @@ namespace PAD_TFI.Controladores {
                     InsertarCompraEnDB(nombre, apellido, dni, telefono, correo, calle, altura, piso, dpto);
                     CrearPagoEnMercadoLibre();
                     _pagopendiente = true;
+                    
                 }
 
 
@@ -190,7 +191,7 @@ namespace PAD_TFI.Controladores {
                 bd.ClienteSet.Add(cliente);
                 bd.SaveChanges();
 
-
+                CargarVentaEnBD(cliente);
             }
         }
 
@@ -237,7 +238,7 @@ namespace PAD_TFI.Controladores {
 
         public void CargarListadoDeProductos()
         {
-			decimal costoTotal = 0.0m;
+			costoTotal = 0.0m;
             using (var bd = new BaseDeDatos())
             {
 				foreach (var item in _carrito) {
@@ -280,6 +281,29 @@ namespace PAD_TFI.Controladores {
             {
                 return false;
             }
+        }
+
+        private void CargarVentaEnBD(ClienteSet cliente)
+        {
+            using (var bd = new BaseDeDatos())
+            {
+                VentaSet nuevaVenta = new VentaSet();
+                nuevaVenta.Fecha = DateTime.Now;
+                nuevaVenta.ClienteSet = cliente;
+
+                bd.VentaSet.Add(nuevaVenta);
+                bd.SaveChanges();
+
+                foreach (var item in _carrito)
+                {
+                    ProductoSet producto = bd.ProductoSet.Find(item.Key);
+                    producto.Stock -= item.Value;
+                    bd.SaveChanges();
+                }
+
+
+            }
+
         }
     }
 }
