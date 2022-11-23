@@ -51,6 +51,19 @@ footer {
 	text-align:center;
 }
 
+.prodInfoStock {
+	position: relative;
+	display: block;
+	width: 100%+20px;
+	margin: -10px;
+	background: linear-gradient(darkslategray, darkred);
+	color: lightcoral;
+	font-style: italic;
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
+}
+
 .productosDiv {
 	background-color: lightblue;
 	border-radius: 5px;

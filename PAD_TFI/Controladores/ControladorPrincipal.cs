@@ -72,9 +72,16 @@ namespace PAD_TFI.Controladores {
 		private void LlenarTabla(IEnumerable<ProductoSet> productos) {
 			_principal.IniciarTabla(COLUMNAS);
 			int cantidad = 0;
-			string info=null;
+			string info;
+			string avisoStock;
 			foreach (var prod in productos) {
+				avisoStock = null;
 				cantidad = GetCantidad(prod.Id);
+				if (cantidad >= prod.Stock) {
+					cantidad = prod.Stock;
+					_carrito[prod.Id] = cantidad;
+					avisoStock = "Sin stock";
+				}
 				info = "";
 				foreach (var desc in prod.DescuentoSet) {
 					info += $"{desc.Descripcion}\n";
@@ -90,6 +97,7 @@ namespace PAD_TFI.Controladores {
 							"$" + prod.PrecioUnitario.ToString("N"),
 							cantidad,
 							info,
+							avisoStock,
 							"$" + precioTotal.ToString("N"),
 							string.Format("(-{0}%)", porcentajeDescuento)
 						);
@@ -101,7 +109,8 @@ namespace PAD_TFI.Controladores {
 							prod.MarcaSet.Nombre,
 							"$" + (prod.PrecioUnitario * Math.Max(1, cantidad)).ToString("N"),
 							cantidad,
-							info
+							info,
+							avisoStock
 						);
 					}
 				} else {
@@ -112,7 +121,8 @@ namespace PAD_TFI.Controladores {
 						prod.MarcaSet.Nombre,
 						"$" + (prod.PrecioUnitario * Math.Max(1, cantidad)).ToString("N"),
 						cantidad,
-						info
+						info,
+						avisoStock
 					);
 				}
 			}
@@ -169,7 +179,7 @@ namespace PAD_TFI.Controladores {
         {
 			if (ControladorCarrito.Instance.CompraCompletada())
 			{
-				_carrito.Clear();
+				//_carrito.Clear();
 
 			}
 
