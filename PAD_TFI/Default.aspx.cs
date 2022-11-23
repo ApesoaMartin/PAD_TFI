@@ -71,11 +71,13 @@ namespace PAD_TFI {
 			return space;
 		}
 
-		public void AgregarCelda(int pId, string imageUrl, string descripcion, string marca, string precio, int cantidad, string infoDescuento, string precioConDescuento=null, string descuento = null) {
+		public void AgregarCelda(int pId, string imageUrl, string descripcion, string marca, string precio, int cantidad, string infoDescuento, string infoStock, string precioConDescuento=null, string descuento = null) {
 			var celda = new TableCell();
 			var div = new HtmlGenericControl("div");
 
-			if (!string.IsNullOrWhiteSpace(infoDescuento))
+			if (!string.IsNullOrWhiteSpace(infoStock))
+				div.Controls.Add(new Label() { Text = infoStock, CssClass = "prodInfoStock" });
+			else if (!string.IsNullOrWhiteSpace(infoDescuento))
 				div.Controls.Add(new Label() { Text = infoDescuento, CssClass = "prodInfoDescuento" });
 
 			div.Controls.Add(new System.Web.UI.WebControls.Image() {
@@ -150,7 +152,7 @@ namespace PAD_TFI {
 			celda.Width = 200;
 			celda.Controls.Add(div);
 
-			_ultimaFila.Cells.Add(celda);
+			_ultimaFila?.Cells.Add(celda);
 
 			_ultimaPosicion++;
 			if (_ultimaPosicion == _columnas) {

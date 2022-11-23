@@ -3,7 +3,7 @@
 
 		void IniciarTabla(int columnas);
 
-		void AgregarCelda(int pId, string imageUrl, string descripcion, string marca, string precio, int cantidad, string infoDescuento, string precioConDescuento = null, string descuento = null);
+		void AgregarCelda(int pId, string imageUrl, string descripcion, string marca, string precio, int cantidad, string infoDescuento, string infoStock, string precioConDescuento = null, string descuento = null);
 
 		void TerminarTabla();
 	}
