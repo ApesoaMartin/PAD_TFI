@@ -29,5 +29,7 @@ namespace PAD_TFI.Interfaces {
 		void ErrorEnElPago();
 
 		bool CompraCompletada();
+
+		void IntentoDePago();
 	}
 }

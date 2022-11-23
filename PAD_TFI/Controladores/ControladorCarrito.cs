@@ -28,6 +28,7 @@ namespace PAD_TFI.Controladores {
         private static volatile ControladorCarrito _instance;
         private static readonly object _syncLock = new object();
 
+        private bool _intentoDePago = false;
         private bool _pagopendiente = false;
         public bool FallaEnElPago { get; set; }
         private Preference preference;
@@ -271,9 +272,10 @@ namespace PAD_TFI.Controladores {
 
         public bool CompraCompletada()
         {
-            if (!_pagopendiente && !FallaEnElPago)
+            if (!_pagopendiente && !FallaEnElPago && _intentoDePago)
             {
                 _pagopendiente = false;
+                _intentoDePago = false;
                 if(_carrito != null)_carrito.Clear();
                 return true;
             }
@@ -304,6 +306,9 @@ namespace PAD_TFI.Controladores {
 
             }
 
+        }
+
+        public void IntentoDePago()=> _intentoDePago = true;
         }
     }
 }
