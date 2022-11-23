@@ -309,6 +309,5 @@ namespace PAD_TFI.Controladores {
         }
 
         public void IntentoDePago()=> _intentoDePago = true;
-        }
     }
 }
