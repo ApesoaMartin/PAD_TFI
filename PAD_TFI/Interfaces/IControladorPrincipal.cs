@@ -17,6 +17,8 @@ namespace PAD_TFI.Interfaces {
 				out decimal precioTotal, out decimal descuentoTotal, out int porcentajeDescuento);
 
 		Dictionary<int, int> ObtenerCarrito();
+		string ObtenerUrlPaginaPrincipal();
 
+		void VerificarEstadoCompra();
 	}
 }

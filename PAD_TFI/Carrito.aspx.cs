@@ -28,9 +28,23 @@ namespace PAD_TFI {
             _controlador.CargarListadoDeProductos();
             if (!IsPostBack)
             {
+                if (!_controlador.ObtenerEstadoDePago())
+                {
+                    ConfirmacionPanel.Visible = true;
+                    PagarPanel.Visible = false;
+                    fallaPagoHD.Visible = false;
+                    compraConfirmadaHD.Visible = true;
+                }
+                else
+                {
+                    _controlador.ErrorEnElPago();
+                    pagarBTN.PostBackUrl = _controlador.ObtenerURLPago();
+                    ConfirmacionPanel.Visible = false;
+                    compraConfirmadaHD.Visible = false;
+                    fallaPagoHD.Visible = true;
+                    PagarPanel.Visible = true;
+                }
                 
-                ConfirmacionPanel.Visible = true;
-                PagarPanel.Visible = false;
                 provinciaSL.DataSource = _controlador.ObtenerProvincias();
                 localidadSL.Enabled = false;
                 Page.DataBind();
@@ -67,17 +81,27 @@ namespace PAD_TFI {
 
         protected void confirmacionBTN_Click(object sender, EventArgs e)
         {
-            bool resultado = _controlador.ConfirmarCompra();
-            if (!resultado)
+            if (!_controlador.ObtenerEstadoDePago())
             {
-				lblError.Text = "Por favor revisar los campos";
+                bool resultado = _controlador.ConfirmarCompra();
+                if (!resultado)
+                {
+
+                    lblError.Text = "Por favor revisar los campos";
+                }
+                else
+                {
+                    lblError.Text = "";
+                    ConfirmacionPanel.Visible = false;
+                    PagarPanel.Visible = true;
+
+                }
             }
             else
             {
-				lblError.Text = "";
-				ConfirmacionPanel.Visible = false;
-                PagarPanel.Visible = true;
+                lblError.Text = "Pago de compra previa Pendiente";
             }
+            
         }
 
         public string ObtenerNombre()
@@ -228,5 +252,9 @@ namespace PAD_TFI {
             ProductsTable.Rows.Add(fila);
         }
 
+        protected void pagarBTN_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

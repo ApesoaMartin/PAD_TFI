@@ -158,5 +158,22 @@ namespace PAD_TFI.Controladores {
         {
 			return _carrito;
         }
+
+        public string ObtenerUrlPaginaPrincipal()
+        {
+			return HttpContext.Current.Request.Url.AbsoluteUri;
+
+		}
+		  
+        public void VerificarEstadoCompra()
+        {
+			if (ControladorCarrito.Instance.CompraCompletada())
+			{
+				_carrito.Clear();
+
+			}
+
+
+        }
     }
 }

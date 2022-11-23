@@ -21,17 +21,25 @@ namespace PAD_TFI.Controladores {
 
         private Dictionary<int, int> _carrito;
 
+        private string _urlPaginaPrincipal;
+
         #region Singleton
 
         private static volatile ControladorCarrito _instance;
         private static readonly object _syncLock = new object();
 
+        private bool _pagopendiente = false;
+        public bool FallaEnElPago { get; set; }
+        private Preference preference;
+
         public ControladorCarrito()
         {
             MercadoPagoConfig.AccessToken = "TEST-6986966527076860-111318-4cc8718b374ab28a1fb4700b2a7c21ba-72090181";
+            _urlPaginaPrincipal = ControladorPrincipal.Instance.ObtenerUrlPaginaPrincipal();
+            FallaEnElPago = false;
         }
 
-        public static ControladorCarrito Instance
+        public static IControladorCarrito Instance
         {
             get
             {
@@ -53,12 +61,15 @@ namespace PAD_TFI.Controladores {
         public void SetearVista(ICarrito vista)
         {
             _vista = vista;
+            
         }
 
         public void ObtenerCarrito()
         {
             _carrito = ControladorPrincipal.Instance.ObtenerCarrito();
+            
         }
+
 
 
         public List<string> ObtenerProvincias()
@@ -121,22 +132,23 @@ namespace PAD_TFI.Controladores {
             string calle = _vista.ObtenerCalle();
             string altura = _vista.ObtenerAltura();
 
-            if(!string.IsNullOrWhiteSpace(nombre)
-				&& !string.IsNullOrWhiteSpace(apellido)
-				&& !string.IsNullOrWhiteSpace(dni)
-				&& !string.IsNullOrWhiteSpace(telefono)
-				&& !string.IsNullOrWhiteSpace(correo)
-				&& !string.IsNullOrWhiteSpace(calle)
-				&& !string.IsNullOrWhiteSpace(altura))
+            if (!string.IsNullOrWhiteSpace(nombre)
+                && !string.IsNullOrWhiteSpace(apellido)
+                && !string.IsNullOrWhiteSpace(dni)
+                && !string.IsNullOrWhiteSpace(telefono)
+                && !string.IsNullOrWhiteSpace(correo)
+                && !string.IsNullOrWhiteSpace(calle)
+                && !string.IsNullOrWhiteSpace(altura))
             {
                 string piso = _vista.ObtenerPiso();
                 string dpto = _vista.ObtenerDpto();
                 if (_localidadId >= 0)
                 {
-                    InsertarCompraEnDB(nombre,apellido,dni,telefono, correo,calle,altura,piso,dpto);
+                    InsertarCompraEnDB(nombre, apellido, dni, telefono, correo, calle, altura, piso, dpto);
                     CrearPagoEnMercadoLibre();
+                    _pagopendiente = true;
                 }
-                
+
 
                 return true;
             }
@@ -210,14 +222,16 @@ namespace PAD_TFI.Controladores {
                 Items = items,
                 BackUrls = new PreferenceBackUrlsRequest
                 {
-                    Success = HttpContext.Current.Request.Url.AbsoluteUri,
+                    Success = _urlPaginaPrincipal,
+                    Failure = HttpContext.Current.Request.Url.AbsoluteUri,
                 },
+                BinaryMode = true,
             };
 
             // Crea la preferencia usando el client
             var client = new PreferenceClient();
-            Preference preference = client.Create(request);
-
+            preference = client.Create(request);
+            
             _vista.SetearURLPago(preference.InitPoint);
         }
 
@@ -238,6 +252,34 @@ namespace PAD_TFI.Controladores {
 
             }
             _vista.ActualizarPrecioFinal($"$ {costoTotal.ToString("N")}");
+        }
+
+        public bool ObtenerEstadoDePago() => _pagopendiente;
+
+
+
+        public string ObtenerURLPago()
+        {
+            return preference.InitPoint;
+        }
+
+        public void ErrorEnElPago()
+        {
+            FallaEnElPago = true;
+        }
+
+        public bool CompraCompletada()
+        {
+            if (!_pagopendiente && !FallaEnElPago)
+            {
+                _pagopendiente = false;
+                if(_carrito != null)_carrito.Clear();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

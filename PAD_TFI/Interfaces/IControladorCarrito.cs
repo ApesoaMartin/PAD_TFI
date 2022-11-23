@@ -22,5 +22,12 @@ namespace PAD_TFI.Interfaces {
 
 		void CargarListadoDeProductos();
 
+		bool ObtenerEstadoDePago();
+
+		string ObtenerURLPago();
+
+		void ErrorEnElPago();
+
+		bool CompraCompletada();
 	}
 }

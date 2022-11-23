@@ -22,6 +22,6 @@ namespace PAD_TFI.Interfaces {
 		void AgregarProducto(string urlImagen, string desccripcion, string precioUnitario, string descuento, string cantidad, string precioFinal);
 		void ActualizarPrecioFinal(string total);
 
-
+		
 	}
 }

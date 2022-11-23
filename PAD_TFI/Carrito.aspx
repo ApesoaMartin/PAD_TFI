@@ -3,9 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
         <asp:Panel ID="PagarPanel" runat="server" BackColor="#E4E4E4" Height="124px">
-            <h2 style="font-family: 'Arial Black'; font-size: x-large; font-weight: bold; font-style: oblique; color: #339933; vertical-align: middle; text-align: center; ">Confirmarción Exitosa</h2>
+            <h2 style="font-family: 'Arial Black'; font-size: x-large; font-weight: bold; font-style: oblique; color: #339933; vertical-align: middle; text-align: center; " id="compraConfirmadaHD" runat="server">Confirmarción Exitosa</h2>
+            <h2 style="font-family: 'Arial Black'; font-size: x-large; font-weight: bold; font-style: oblique; color: #CC3300; vertical-align: middle; text-align: center; " id="fallaPagoHD" runat="server">Falla en el pago Pruebe De nuevo</h2>
             <asp:Label ID="Label6" runat="server" Width="938px"></asp:Label>
-            <asp:Button ID="pagarBTN" runat="server" Text="Pagar" BackColor="#99CCFF" BorderColor="#6699FF" BorderStyle="Solid" BorderWidth="5px" Font-Bold="True" Font-Size="14pt" Height="38px" Width="184px" ForeColor="White" />
+            <asp:Button ID="pagarBTN" runat="server" Text="Pagar" BackColor="#99CCFF" BorderColor="#6699FF" BorderStyle="Solid" BorderWidth="5px" Font-Bold="True" Font-Size="14pt" Height="38px" Width="184px" ForeColor="White" OnClick="pagarBTN_Click" />
 
         </asp:Panel>
 

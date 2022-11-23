@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using PAD_TFI.Controladores;
 
 namespace PAD_TFI {
 	public partial class _Default : Page, IPrincipal {
@@ -21,7 +22,7 @@ namespace PAD_TFI {
 
 		protected void Page_Load(object sender, EventArgs e) {
 			categoria = Request["cat"];
-			_controlador = Controladores.ControladorPrincipal.Instance;
+			_controlador = ControladorPrincipal.Instance;
 			_controlador.VincularPagina(this);
 			_columnas = 0;
 			_ultimaPosicion = 0;
@@ -30,6 +31,7 @@ namespace PAD_TFI {
 			if (!Page.IsPostBack) {
 				CategoriaRepeater.DataSource = _controlador.CargarCategorias();
 				CategoriaRepeater.DataBind();
+				_controlador.VerificarEstadoCompra();
 			}
 
 			var action = Request["a"];
