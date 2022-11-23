@@ -192,7 +192,7 @@ namespace PAD_TFI.Controladores {
                 bd.ClienteSet.Add(cliente);
                 bd.SaveChanges();
 
-                CargarVentaEnBD(cliente);
+                CargarVentaEnBD(bd,cliente);
             }
         }
 
@@ -285,10 +285,9 @@ namespace PAD_TFI.Controladores {
             }
         }
 
-        private void CargarVentaEnBD(ClienteSet cliente)
+        private void CargarVentaEnBD(BaseDeDatos bd, ClienteSet cliente)
         {
-            using (var bd = new BaseDeDatos())
-            {
+
                 VentaSet nuevaVenta = new VentaSet();
                 nuevaVenta.Fecha = DateTime.Now;
                 nuevaVenta.ClienteSet = cliente;
@@ -303,8 +302,6 @@ namespace PAD_TFI.Controladores {
                     bd.SaveChanges();
                 }
 
-
-            }
 
         }
 
